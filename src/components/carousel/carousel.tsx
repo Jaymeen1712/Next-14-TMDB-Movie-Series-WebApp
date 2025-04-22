@@ -5,22 +5,24 @@ import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from "swiper/react";
 import CarouselImage from "./image";
 
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
-import CarouselDetails from "./details";
 import CarouselPaginationButtons from "./controls/pagination-buttons";
+import CarouselDetails from "./details";
 
-import "./controls/pagination.css";
 import { CommonCardType } from "@/types";
 import { TMDB_IMAGE_BASE_URL, capitalizeFirstLetter } from "@/utils";
+import "./controls/pagination.css";
 
 const Carousel = ({
   commonDetails,
   setDashboardImage,
+  isLoading,
 }: {
   commonDetails: CommonCardType[];
   setDashboardImage: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean;
 }) => {
   const swiperRef = useRef<SwiperRef>(null);
 
@@ -78,20 +80,29 @@ const Carousel = ({
               return (
                 <SwiperSlide key={detail.id}>
                   <div className="grid grid-cols-2 items-center gap-14">
-                    <CarouselImage
-                      src={`${TMDB_IMAGE_BASE_URL}/original${detail.backdrop_path}`}
-                      alt="image"
-                      type={detail.media_type}
-                      detailId={detail.id}
-                    />
-                    <CarouselDetails
-                      detailId={detail.id}
-                      chips={chips}
-                      title={capitalizeFirstLetter(title)}
-                      rating={detail.vote_average}
-                      description={detail.overview}
-                      type={detail.media_type}
-                    />
+                    {isLoading ? (
+                      <>
+                        <div />
+                        <div />
+                      </>
+                    ) : (
+                      <>
+                        <CarouselImage
+                          src={`${TMDB_IMAGE_BASE_URL}/original${detail.backdrop_path}`}
+                          alt="image"
+                          type={detail.media_type}
+                          detailId={detail.id}
+                        />
+                        <CarouselDetails
+                          detailId={detail.id}
+                          chips={chips}
+                          title={capitalizeFirstLetter(title)}
+                          rating={detail.vote_average}
+                          description={detail.overview}
+                          type={detail.media_type}
+                        />
+                      </>
+                    )}
                   </div>
                 </SwiperSlide>
               );
@@ -99,7 +110,7 @@ const Carousel = ({
           </>
         </Swiper>
       </div>
-      <CarouselPaginationButtons ref={swiperRef} />
+      {!isLoading && <CarouselPaginationButtons ref={swiperRef} />}
     </div>
   );
 };

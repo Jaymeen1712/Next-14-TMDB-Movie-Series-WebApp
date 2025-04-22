@@ -1,14 +1,28 @@
+"use client";
+
+import { getMoviesLatestAPI } from "@/apis/movie";
 import MovieListContainer from "@/components/movie-list/container";
 import { CommonCardType } from "@/types";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 
-interface LatestMoviesListProps {
-  data: CommonCardType[] | null;
-}
+const LatestMoviesList = () => {
+  const [latestMovies, setLatestMovies] = useState<CommonCardType[]>([]);
 
-const LatestMoviesList = ({ data }: LatestMoviesListProps) => {
+  useEffect(() => {
+    (async () => {
+      const { response: latestMovies, errors: latestMoviesErrors } =
+        await getMoviesLatestAPI();
+
+      if (!latestMoviesErrors) {
+        latestMovies.results.length > 20
+          ? setLatestMovies(latestMovies.results.slice(0, 20))
+          : setLatestMovies(latestMovies.results);
+      }
+    })();
+  }, []);
+
   return (
     <MovieListContainer
       title="Latest Movies"
@@ -25,7 +39,7 @@ const LatestMoviesList = ({ data }: LatestMoviesListProps) => {
           </button>
         </Link>
       }
-      data={data}
+      data={latestMovies}
       type="carousel"
     />
   );
