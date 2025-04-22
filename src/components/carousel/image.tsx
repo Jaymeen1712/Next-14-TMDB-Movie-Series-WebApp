@@ -1,6 +1,5 @@
 import Image, { ImageProps } from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FaPlay } from "react-icons/fa";
 
 interface CarouselImageProps extends ImageProps {

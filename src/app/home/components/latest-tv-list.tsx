@@ -1,14 +1,28 @@
+"use client";
+
+import { getTvLatestAPI } from "@/apis/tv-series";
 import MovieListContainer from "@/components/movie-list/container";
 import { CommonCardType } from "@/types";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 
-interface LatestTvListProps {
-  data: CommonCardType[] | null;
-}
+const LatestTvList = () => {
+  const [latestTv, setLatestTv] = useState<CommonCardType[]>([]);
 
-const LatestTvList = ({ data }: LatestTvListProps) => {
+  useEffect(() => {
+    (async () => {
+      const { response: latestTv, errors: latestTvErrors } =
+        await getTvLatestAPI();
+
+      if (!latestTvErrors) {
+        latestTv.results.length > 20
+          ? setLatestTv(latestTv.results.slice(0, 20))
+          : setLatestTv(latestTv.results);
+      }
+    })();
+  }, []);
+
   return (
     <MovieListContainer
       title="Latest TV Series"
@@ -25,7 +39,7 @@ const LatestTvList = ({ data }: LatestTvListProps) => {
           </button>
         </Link>
       }
-      data={data}
+      data={latestTv}
       type="carousel"
     />
   );
