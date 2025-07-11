@@ -1,3 +1,9 @@
+// Re-export all types from organized modules
+export * from "./api";
+export * from "./components";
+export * from "./utils";
+
+// Legacy types for backward compatibility
 export type CommonCardType = MovieTrendingType &
   TvTrendingType &
   OnTheAirTVType &

@@ -72,8 +72,9 @@ const Carousel = ({
                 );
               }
 
-              detail.release_date &&
-                chips.push(detail.release_date?.split("-")[0]);
+              if (detail.release_date) {
+                chips.push(detail.release_date.split("-")[0]);
+              }
 
               const title = detail.title || detail.name || "Title";
 
