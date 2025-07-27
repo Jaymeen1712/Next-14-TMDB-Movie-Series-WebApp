@@ -3,13 +3,15 @@
 import { getMoviesLatestAPI } from "@/apis/movie";
 import MovieListContainer from "@/components/movie-list/container";
 import { CommonCardType } from "@/types";
-import Link from "next/link";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 
 const LatestMoviesList = () => {
   const [latestMovies, setLatestMovies] = useState<CommonCardType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -30,17 +32,15 @@ const LatestMoviesList = () => {
     <MovieListContainer
       title="Latest Movies"
       headerRight={
-        <Link href={"/movies"}>
-          <button
-            className="group bg-none pt-1"
-            // onClick={handleClick}
-          >
-            <FaAngleRight
-              className={"text-white group-hover:text-primary"}
-              size={22}
-            />
-          </button>
-        </Link>
+        <button
+          className="group bg-none pt-1"
+          onClick={() => router.push("/movies")}
+        >
+          <FaAngleRight
+            className={"text-white group-hover:text-primary"}
+            size={22}
+          />
+        </button>
       }
       data={latestMovies}
       type="carousel"
