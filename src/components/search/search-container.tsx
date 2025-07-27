@@ -1,11 +1,10 @@
 import { CommonCardType } from "@/types";
-import React from "react";
-import SearchList from "./search-list";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import SearchList from "./search-list";
 
 interface SearchContainerProps {
-  data: CommonCardType[] | null;
+  data: CommonCardType[] | undefined;
   search: string;
 }
 

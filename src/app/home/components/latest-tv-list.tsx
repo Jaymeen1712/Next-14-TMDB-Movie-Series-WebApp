@@ -9,9 +9,11 @@ import { FaAngleRight } from "react-icons/fa";
 
 const LatestTvList = () => {
   const [latestTv, setLatestTv] = useState<CommonCardType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       const { response: latestTv, errors: latestTvErrors } =
         await getTvLatestAPI();
 
@@ -20,6 +22,7 @@ const LatestTvList = () => {
           ? setLatestTv(latestTv.results.slice(0, 20))
           : setLatestTv(latestTv.results);
       }
+      setIsLoading(false);
     })();
   }, []);
 
@@ -41,6 +44,7 @@ const LatestTvList = () => {
       }
       data={latestTv}
       type="carousel"
+      isLoading={isLoading}
     />
   );
 };

@@ -8,17 +8,19 @@ import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 interface TrendingMovieListProps {
-  movieData: CommonCardType[] | null;
-  tvData: CommonCardType[] | null;
+  movieData: CommonCardType[] | undefined;
+  tvData: CommonCardType[] | undefined;
 }
 
 const TrendingList = () => {
   const [currentTab, setCurrentTab] = useState("movies");
   const [trendingMovies, setTrendingMovies] = useState<CommonCardType[]>([]);
   const [trendingTv, setTrendingTv] = useState<CommonCardType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       const { response: trendingMovies, errors: trendingMoviesErrors } =
         await getMoviesTrendingAPI();
       const { response: trendingTv, errors: trendingTvErrors } =
@@ -31,6 +33,7 @@ const TrendingList = () => {
       if (!trendingTvErrors) {
         setTrendingTv(trendingTv.results);
       }
+      setIsLoading(false);
     })();
   }, []);
 
@@ -72,6 +75,7 @@ const TrendingList = () => {
           </Button>
         </div>
       }
+      isLoading={isLoading}
     />
   );
 };

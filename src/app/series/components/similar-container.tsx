@@ -1,9 +1,8 @@
 import MovieListContainer from "@/components/movie-list/container";
 import { CommonCardType } from "@/types";
-import React from "react";
 
 interface SimilarContainerProps {
-  data: CommonCardType[] | null;
+  data: CommonCardType[] | undefined;
 }
 
 const SimilarContainer = ({ data }: SimilarContainerProps) => {

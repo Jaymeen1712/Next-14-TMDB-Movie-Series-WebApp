@@ -9,9 +9,11 @@ import { FaAngleRight } from "react-icons/fa";
 
 const LatestMoviesList = () => {
   const [latestMovies, setLatestMovies] = useState<CommonCardType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       const { response: latestMovies, errors: latestMoviesErrors } =
         await getMoviesLatestAPI();
 
@@ -20,6 +22,7 @@ const LatestMoviesList = () => {
           ? setLatestMovies(latestMovies.results.slice(0, 20))
           : setLatestMovies(latestMovies.results);
       }
+      setIsLoading(false);
     })();
   }, []);
 
@@ -41,6 +44,7 @@ const LatestMoviesList = () => {
       }
       data={latestMovies}
       type="carousel"
+      isLoading={isLoading}
     />
   );
 };

@@ -1,9 +1,8 @@
 import MovieListContainer from "@/components/movie-list/container";
 import { CommonCardType } from "@/types";
-import React from "react";
 
 interface SearchResultsContainerProps {
-  data: CommonCardType[] | null;
+  data: CommonCardType[] | undefined;
   searchMedia: string;
 }
 

@@ -1,13 +1,22 @@
 import { CommonCardType } from "@/types";
-import React from "react";
 import ListCarousel from "./carousel";
 
 interface ListCarouselContainerProps {
   data: CommonCardType[];
+  isLoading?: boolean;
 }
 
-const ListCarouselContainer = ({ data }: ListCarouselContainerProps) => {
-  return <div>{data && <ListCarousel data={data} />}</div>;
+const ListCarouselContainer = ({
+  data,
+  isLoading = false,
+}: ListCarouselContainerProps) => {
+  return (
+    <div>
+      {(data || isLoading) && (
+        <ListCarousel data={data || []} isLoading={isLoading} />
+      )}
+    </div>
+  );
 };
 
 export default ListCarouselContainer;
