@@ -37,10 +37,16 @@ const DashboardCarousel = () => {
 
   return (
     <>
-      <GradientImageContainer path={dashboardImage} />
+      {isLoading ? (
+        <div className="absolute h-full w-full animate-pulse bg-gradient-to-b from-neutral-800 to-neutral-900" />
+      ) : (
+        <GradientImageContainer path={dashboardImage} />
+      )}
       <div className="my-32 min-h-[550px]">
         <CarouselContainer
-          commonDetails={data.length > 10 ? data.slice(0, 10) : data}
+          commonDetails={
+            isLoading ? [] : data.length > 10 ? data.slice(0, 10) : data
+          }
           setDashboardImage={setDashboardImage}
           isLoading={isLoading}
         />

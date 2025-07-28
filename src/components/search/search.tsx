@@ -4,18 +4,18 @@ import { getSearchMediaAPI } from "@/apis/common";
 import useDebounce from "@/hooks/useDebounce";
 import { CommonCardType } from "@/types";
 import { Input, InputProps } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
-import SearchContainer from "./search-container";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import SearchContainer from "./search-container";
 
 const Search = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const debouncedValue = useDebounce(inputValue, 1000);
   const pathname = usePathname();
-  const [searchResults, setSearchResults] = useState<CommonCardType[] | null>(
-    [],
-  );
+  const [searchResults, setSearchResults] = useState<
+    CommonCardType[] | undefined
+  >([]);
   const [showSearchContainer, setShowSearchContainer] = useState(true);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,10 +28,13 @@ const Search = () => {
     const getSearchResults = async () => {
       if (debouncedValue) {
         const { response: searchMediaResponse, errors: searchMediaErrors } =
-        await getSearchMediaAPI(debouncedValue);
-        
+          await getSearchMediaAPI(debouncedValue);
+
         if (!searchMediaErrors) {
-          console.log("🚀 ~ getSearchResults ~ searchMediaResponse:", searchMediaResponse)
+          console.log(
+            "🚀 ~ getSearchResults ~ searchMediaResponse:",
+            searchMediaResponse,
+          );
           setSearchResults(searchMediaResponse.results);
         }
       }

@@ -1,22 +1,33 @@
 "use client";
 
-import React from "react";
 import { CommonCardType } from "@/types";
 
-import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
+import "swiper/css/free-mode";
 import "swiper/css/navigation";
-import 'swiper/css/free-mode';
 
-import "./carousel.css";
 import MovieCard from "../movie-card";
+import MovieCardSkeleton from "../movie-card-skeleton";
+import "./carousel.css";
 
-const ListCarousel = ({ data }: { data: CommonCardType[] }) => {
+interface ListCarouselProps {
+  data: CommonCardType[];
+  isLoading?: boolean;
+}
+
+const ListCarousel = ({ data, isLoading = false }: ListCarouselProps) => {
   const renderMovieList = data.map((subData) => (
     <SwiperSlide key={subData.id}>
       <MovieCard data={subData} />
+    </SwiperSlide>
+  ));
+
+  const renderSkeletonList = Array.from({ length: 10 }, (_, index) => (
+    <SwiperSlide key={`skeleton-${index}`}>
+      <MovieCardSkeleton />
     </SwiperSlide>
   ));
 
@@ -29,7 +40,7 @@ const ListCarousel = ({ data }: { data: CommonCardType[] }) => {
       spaceBetween={4}
       freeMode
     >
-      <>{renderMovieList}</>
+      {isLoading ? <>{renderSkeletonList}</> : <>{renderMovieList}</>}
     </Swiper>
   );
 };

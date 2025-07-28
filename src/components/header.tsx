@@ -1,39 +1,41 @@
 "use client";
 
-import React from "react";
+import Logo from "@/components/logo";
+import { HEADER_TRANSPARENT, dashboardMenuItems } from "@/utils";
 import {
-  Input,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import Link from "next/link";
-import { HEADER_TRANSPARENT, dashboardMenuItems } from "@/utils";
-import Logo from "@/components/logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Search from "./search/search";
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const selectedMenuItem = pathname.split("/")[1];
+
+  const handleNavigation = (link: string) => {
+    router.push(link);
+  };
 
   const menuItems = dashboardMenuItems.map((item) => (
     <NavbarItem key={item.key}>
-      <Link
-        href={item.link}
-        className={`hover:text-primary ${
+      <button
+        onClick={() => handleNavigation(item.link)}
+        className={`transition-colors hover:text-primary ${
           selectedMenuItem === item.key ? "text-primary" : "text-white"
         }`}
       >
         {item.name.toUpperCase()}
-      </Link>
+      </button>
     </NavbarItem>
   ));
 
   return (
     <Navbar
-      className={`hello m-0 bg-neutral-950 shadow items-center ${
+      className={`hello m-0 items-center bg-neutral-950 shadow ${
         HEADER_TRANSPARENT.includes(selectedMenuItem.toLowerCase()) &&
         "bg-0 absolute left-0 right-0 top-0"
       }`}
@@ -42,9 +44,9 @@ const Header = () => {
       maxWidth="2xl"
     >
       <NavbarBrand className="justify-center">
-        <Link href="/">
+        <button onClick={() => handleNavigation("/")}>
           <Logo />
-        </Link>
+        </button>
       </NavbarBrand>
 
       <NavbarContent justify="start" className="gap-12">

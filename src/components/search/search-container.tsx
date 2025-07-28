@@ -1,15 +1,22 @@
+"use client";
+
 import { CommonCardType } from "@/types";
-import React from "react";
-import SearchList from "./search-list";
 import { Button } from "@nextui-org/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import SearchList from "./search-list";
 
 interface SearchContainerProps {
-  data: CommonCardType[] | null;
+  data: CommonCardType[] | undefined;
   search: string;
 }
 
 const SearchContainer = ({ data, search }: SearchContainerProps) => {
+  const router = useRouter();
+
+  const handleViewMore = () => {
+    router.push(`/search?keyword=${search}`);
+  };
+
   return (
     <>
       {data && (
@@ -20,19 +27,15 @@ const SearchContainer = ({ data, search }: SearchContainerProps) => {
             </div>
           ))}
           <div>
-            <Link
-              href={`/search?keyword=${search}`}
-              className="flex items-center justify-center"
+            <Button
+              fullWidth
+              className="mt-4 bg-primary text-base"
+              disableAnimation
+              disableRipple
+              onPress={handleViewMore}
             >
-              <Button
-                fullWidth
-                className="mt-4 bg-primary text-base"
-                disableAnimation
-                disableRipple
-              >
-                View more
-              </Button>
-            </Link>
+              View more
+            </Button>
           </div>
         </div>
       )}
