@@ -12,7 +12,7 @@ const CarouselContainer = ({
   isLoading: boolean;
 }) => {
   return (
-    <div className="mx-16 flex min-h-[550px] items-center">
+    <div className="xs:mx-6 mx-4 flex min-h-[400px] items-center sm:mx-8 sm:min-h-[500px] md:mx-12 lg:mx-16 lg:min-h-[550px]">
       <Carousel
         commonDetails={commonDetails}
         setDashboardImage={setDashboardImage}

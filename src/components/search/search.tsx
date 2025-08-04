@@ -73,15 +73,10 @@ const Search = () => {
         size="sm"
         radius="sm"
         startContent={<FaSearch className="mx-1" />}
-        placeholder="Search for movies or tv series"
+        placeholder="Search movies & series"
         variant="faded"
         labelPlacement="outside"
-        // classNames={{
-        //   label: "text-black",
-        //   // input: ["bg-neutral-700"],
-        //   // mainWrapper: ["bg-neutral-700"]
-        // }}
-        className="min-w-[750px]"
+        className="w-full min-w-[200px] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[500px] xl:min-w-[750px]"
         onChange={handleInputChange}
         value={inputValue}
         onFocus={() => setShowSearchContainer(true)}

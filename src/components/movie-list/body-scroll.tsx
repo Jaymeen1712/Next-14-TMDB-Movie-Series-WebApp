@@ -32,7 +32,7 @@ const MovieListBodyScroll = ({
 
   return (
     <div>
-      <div className="flex min-h-[968px] flex-wrap justify-start gap-1">
+      <div className="xs:grid-cols-3 3xl:grid-cols-9 xs:gap-3 grid min-h-[968px] grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
         {isLoading ? <>{renderSkeletonList}</> : <>{renderList}</>}
       </div>
       {pagination && (

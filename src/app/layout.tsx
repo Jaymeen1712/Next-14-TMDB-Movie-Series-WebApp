@@ -1,9 +1,9 @@
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Pathway_Extreme } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
 import Providers from "./providers";
-import Footer from "@/components/footer";
 
 const pathway_Extreme = Pathway_Extreme({
   subsets: ["latin"],
@@ -25,9 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={pathway_Extreme.className}>
         <Providers>
-          <div className="flex flex-col h-full">
+          <div className="flex h-full min-h-screen flex-col">
             <Header />
-            {children}
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </Providers>

@@ -4,7 +4,7 @@ const MovieCardSkeleton = () => {
   return (
     <Card
       radius="none"
-      className="3xl:w-[227px] 3xl:h-[337px] relative animate-pulse border-none lg:h-[320px] lg:w-[216px]"
+      className="xs:w-[160px] xs:h-[240px] 3xl:w-[227px] 3xl:h-[337px] relative h-[280px] w-full animate-pulse border-none sm:h-[270px] sm:w-[180px] md:h-[300px] md:w-[200px] lg:h-[320px] lg:w-[216px] xl:h-[330px] xl:w-[220px]"
       shadow="md"
     >
       <CardHeader className="absolute left-2 top-1 z-10">

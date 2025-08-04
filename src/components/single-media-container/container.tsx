@@ -1,8 +1,7 @@
+import { CreditType, SingleMediaType } from "@/types";
 import { TMDB_IMAGE_BASE_URL } from "@/utils";
 import Image from "next/image";
-import React from "react";
 import MediaDetailsContainer from "./detail";
-import { CreditType, SingleMediaType } from "@/types";
 
 interface SingleMediaContainerProps {
   data: SingleMediaType | null;
@@ -10,17 +9,21 @@ interface SingleMediaContainerProps {
   type: string;
 }
 
-const SingleMediaContainer = ({ data, credits, type }: SingleMediaContainerProps) => {
+const SingleMediaContainer = ({
+  data,
+  credits,
+  type,
+}: SingleMediaContainerProps) => {
   return (
-    <div className="w-full px-60">
-      <div className="relative z-30 mx-auto pb-36 pt-48">
-        <div className="flex justify-center">
-          <div className="flex justify-center">
-            <div className="relative h-full w-[10%] bg-transparent pt-2 backdrop-blur-xl backdrop-brightness-150">
-              <div className="absolute inset-0 left-auto top-[10%] w-[180%]">
+    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-32 xl:px-60">
+      <div className="relative z-30 mx-auto pb-16 pt-24 sm:pb-24 sm:pt-32 lg:pb-36 lg:pt-48">
+        <div className="flex flex-col justify-center gap-6 lg:flex-row lg:gap-0">
+          <div className="flex justify-center lg:justify-start">
+            <div className="relative h-full w-full max-w-[300px] bg-transparent pt-2 backdrop-blur-xl backdrop-brightness-150 lg:w-[10%]">
+              <div className="relative lg:absolute lg:inset-0 lg:left-auto lg:top-[10%] lg:w-[180%]">
                 {data && (
                   <>
-                    <div className="absolute left-5 top-5 text-xl font-bold text-white drop-shadow-xl">
+                    <div className="absolute left-3 top-3 z-10 text-sm font-bold text-white drop-shadow-xl sm:left-5 sm:top-5 sm:text-xl">
                       HD
                     </div>
                     <Image
@@ -33,7 +36,7 @@ const SingleMediaContainer = ({ data, credits, type }: SingleMediaContainerProps
                 )}
               </div>
             </div>
-            <div className="w-[90%] bg-transparent backdrop-blur-xl backdrop-brightness-125">
+            <div className="mt-4 w-full bg-transparent backdrop-blur-xl backdrop-brightness-125 lg:mt-0 lg:w-[90%]">
               {data && credits && (
                 <MediaDetailsContainer
                   data={data}

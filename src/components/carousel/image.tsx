@@ -19,18 +19,24 @@ const CarouselImage = ({
 
   return (
     <Link href={`/${type === "tv" ? "series" : "movie"}/${detailId}`}>
-      <div className="group relative flex cursor-pointer items-center justify-center">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform ">
-          <div className="rounded-full bg-white bg-opacity-10 p-7 backdrop-blur-md duration-200 group-hover:bg-opacity-20">
-            <FaPlay color="white" size={35} className="pl-2" />
+      <div className="group relative flex w-full cursor-pointer items-center justify-center">
+        <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform">
+          <div className="xs:p-5 rounded-full bg-white bg-opacity-10 p-4 backdrop-blur-md duration-200 group-hover:bg-opacity-20 sm:p-6 lg:p-7">
+            <FaPlay
+              color="white"
+              size={20}
+              className="xs:pl-2 pl-1 sm:size-[25px] lg:size-[35px]"
+            />
           </div>
         </div>
         <Image
-          className="rounded-3xl"
+          className="h-auto w-full rounded-2xl object-cover sm:rounded-3xl"
           alt={alt}
           {...rest}
           width={width}
           height={height}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 783px"
+          priority
         />
       </div>
     </Link>
